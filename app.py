@@ -14,6 +14,8 @@ st.set_page_config(
 
 if "staff_ok" not in st.session_state:
     st.session_state["staff_ok"] = False
+if "staff_name" not in st.session_state:
+    st.session_state["staff_name"] = None
 
 st.title("🐾 Animal Shelter Management System")
 
@@ -26,23 +28,23 @@ ANIMALS_CSV = BASE_DIR / "animals.csv"
 SHELTERS_CSV = BASE_DIR / "shelters.csv"
 VACCINES_CSV = BASE_DIR / "vaccines.csv"
 VACC_RECORD_CSV = BASE_DIR / "vaccination_record.csv"
+EMPLOYEES_CSV = BASE_DIR / "employees.csv"
 
 IMAGES_DIR = Path(__file__).parent / "images"
 
 ANIMAL_PHOTOS = {
     "Bella": "bella.jpg",
     "Charlie": "charlie.jpg",
+    "Coco": "coco.jpg",
     "Daisy": "daisy.jpg",
-    "Max": "max.jpg",
     "Luna": "luna.jpg",
+    "Max": "max.jpg",
     "Milo": "milo.jpg",
+    "Nala": "nala.jpg",
     "Oliver": "oliver.jpg",
     "Pepper": "pepper.jpg",
-    "Simba": "simba.jpg",
-    "Coco": "coco.jpg",
     "Rocky": "rocky.jpg",
-    "Nala": "nala.jpg",
-    "Oreo": "oreo.jpg",
+    "Simba": "simba.jpg",
 }
 
 def get_image_path(name):
@@ -61,12 +63,13 @@ def load_data():
     shelters = pd.read_csv(SHELTERS_CSV, sep=";")
     vaccines = pd.read_csv(VACCINES_CSV, sep=";")
     vaccination_record = pd.read_csv(VACC_RECORD_CSV, sep=";")
+    employees = pd.read_csv(EMPLOYEES_CSV, sep=";")
 
     animals = animals.merge(shelters[["shelter_id", "shelter_name", "city"]],
                             on="shelter_id", how="left")
-    return animals, shelters, vaccines, vaccination_record
+    return animals, shelters, vaccines, vaccination_record, employees
 
-animals, shelters, vaccines, vaccination_record = load_data()
+animals, shelters, vaccines, vaccination_record, employees = load_data()
 
 # --------------------------------------------------
 # Guest view
@@ -114,7 +117,7 @@ def guest_view():
 # Staff view (mock CRUD)
 # --------------------------------------------------
 def staff_view():
-    st.subheader("Staff – Manage Shelter Data")
+    st.subheader(f"Staff – Manage Shelter Data (Logged in as {st.session_state['staff_name']})")
 
     tabs = st.tabs([
         "View animals", "Add new animal", "Update status",
@@ -164,21 +167,27 @@ def staff_view():
         st.dataframe(vaccination_record, use_container_width=True)
 
 # --------------------------------------------------
-# Sidebar login
+# Sidebar login (Employer ID + password)
 # --------------------------------------------------
 st.sidebar.header("Mode selection")
 mode = st.sidebar.radio("Choose mode", ["Guest", "Staff"])
 
-STAFF_PASSWORD = "shelter123"
 if mode == "Staff":
-    pwd = st.sidebar.text_input("Staff password", type="password")
+    emp_id = st.sidebar.text_input("Employer ID")
+    pwd = st.sidebar.text_input("Password", type="password")
     if st.sidebar.button("Log in"):
-        if pwd == STAFF_PASSWORD:
+        match = employees[
+            (employees["employer_id"].astype(str) == emp_id) &
+            (employees["password"].astype(str) == pwd)
+        ]
+        if not match.empty:
             st.session_state["staff_ok"] = True
-            st.sidebar.success("Logged in as staff.")
+            st.session_state["staff_name"] = match.iloc[0]["name"]
+            st.sidebar.success(f"Welcome {st.session_state['staff_name']}!")
         else:
             st.session_state["staff_ok"] = False
-            st.sidebar.error("Incorrect password.")
+            st.session_state["staff_name"] = None
+            st.sidebar.error("Invalid Employer ID or password.")
 
 # --------------------------------------------------
 # Show views
@@ -187,5 +196,4 @@ if mode == "Staff" and st.session_state["staff_ok"]:
     staff_view()
 else:
     guest_view()
-
 
