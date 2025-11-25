@@ -27,7 +27,7 @@ SHELTERS_CSV = BASE_DIR / "shelters.csv"
 VACCINES_CSV = BASE_DIR / "vaccines.csv"
 VACC_RECORD_CSV = BASE_DIR / "vaccination_record.csv"
 
-IMAGES_DIR = Path(__file__).parent / "data" / "images"
+IMAGES_DIR = Path(__file__).parent / "images"
 
 ANIMAL_PHOTOS = {
     "Bella": "bella.jpg",
