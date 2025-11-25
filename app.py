@@ -26,7 +26,7 @@ st.markdown(
 # --------------------------------------------------
 # Paths & helpers
 # --------------------------------------------------
-BASE_DIR = Path(__file__).parent
+BASE_DIR = Path(__file__).parent/ "data"
 
 # CSV data paths
 ANIMALS_CSV = BASE_DIR / "animals.csv"
