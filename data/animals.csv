@@ -1,0 +1,13 @@
+"animal_id";"name";"species";"size";"hypoallergenic";"breed";"sex";"date_of_birth";"intake_date";"status";"shelter_id"
+1;"Bella";"DOG";"Medium";"YES";"Labrador Retriever";"Female";"2021-05-10";"2024-03-01";"Available";1
+2;"Max";"DOG";"Large";"NO";"German Shepherd Mix";"Male";"";"2024-02-15";"Available";2
+3;"Luna";"CAT";"Small";"YES";"Siamese";"Female";"2022-03-18";"2024-04-10";"Foster";3
+4;"Rocky";"DOG";"Medium";"NO";"Unknown";"Male";"2024-09-25";"2024-01-20";"Adopted";4
+5;"Milo";"CAT";"Small";"NO";"Domestic Shorthair";"Male";"2023-01-05";"2024-05-02";"Available";5
+6;"Daisy";"DOG";"Small";"YES";"Poodle Mix";"Female";"";"2024-03-18";"Pending";6
+7;"Charlie";"DOG";"Large";"NO";"Rottweiler";"Male";"";"2024-02-28";"Available";1
+8;"Pepper";"CAT";"Small";"NO";"Tabby";"Female";"2022-07-19";"2024-04-25";"Available";2
+9;"Oliver";"DOG";"Medium";"NO";"Mixed Breed";"Male";"";"2024-03-30";"Available";3
+10;"Nala";"CAT";"Small";"YES";"Russian Blue";"Female";"2023-02-11";"2024-05-12";"Foster";4
+11;"Simba";"DOG";"Medium";"YES";"Goldendoodle";"Male";"2022-10-05";"2024-03-22";"Available";5
+12;"Coco";"DOG";"Small";"NO";"Unknown";"Female";"2020-09-09";"2024-01-10";"Adopted";6
