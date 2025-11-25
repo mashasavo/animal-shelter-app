@@ -67,11 +67,11 @@ def get_image_path(animal_name: str):
 # --------------------------------------------------
 @st.cache_data
 def load_data():
-    animals = pd.read_csv(ANIMALS_CSV)
-    shelters = pd.read_csv(SHELTERS_CSV)
-    employees = pd.read_csv(EMPLOYEES_CSV)
-    vaccines = pd.read_csv(VACCINES_CSV)
-    vaccination_record = pd.read_csv(VACC_RECORD_CSV)
+    animals = pd.read_csv(ANIMALS_CSV, sep=';')
+    shelters = pd.read_csv(SHELTERS_CSV sep=';')
+    employees = pd.read_csv(EMPLOYEES_CSV sep=';')
+    vaccines = pd.read_csv(VACCINES_CSV sep=';')
+    vaccination_record = pd.read_csv(VACC_RECORD_CSV sep=';')
 
     # Join shelter name into animals for convenience
     animals = animals.merge(shelters[["shelter_id", "shelter_name", "city"]],
