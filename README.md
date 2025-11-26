@@ -166,7 +166,8 @@ A production version would require:
 
 Maria Savostianova  
 University of Central Missouri  
-Database Theory and Applications - Fall 2024 — Final Project
+Database Theory and Applications 
+Fall 2024 — Final Project
 
 
 
