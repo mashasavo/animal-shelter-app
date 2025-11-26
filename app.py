@@ -173,7 +173,7 @@ st.sidebar.header("Mode selection")
 mode = st.sidebar.radio("Choose mode", ["Guest", "Staff"])
 
 if mode == "Staff":
-    emp_id = st.sidebar.text_input("Employer ID")
+    emp_id = st.sidebar.text_input("Employer ID (1–16)")
     pwd = st.sidebar.text_input("Password", type="password")
     if st.sidebar.button("Log in"):
         match = employees[
