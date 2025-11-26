@@ -10,7 +10,7 @@ https://github.com/mashasavo/animal-shelter-app
 
 ## Objective
 
-To design and implement a database-driven application that manages animals, shelters, employees, vaccines, and vaccination records. The system comprises a normalized MySQL database and a Streamlit web application, utilizing CSV snapshots exported from MySQL for cloud deployment.
+This project implements a database-driven Animal Shelter Management System that manages animals, shelters, employees, vaccines, and vaccination records. The system is built around a normalized MySQL database and a Streamlit web application that uses CSV snapshots for cloud deployment.
 - This project was completed as part of the Database Theory and Applications course and is based on a real-world shelter workflow.
 
 ---
@@ -37,6 +37,8 @@ A production version would connect Streamlit directly to MySQL.
 ---
 
 ## Features
+
+The system includes features across both the database layer and the Streamlit application layer.
 
 ### Database Layer (MySQL)
 
@@ -147,7 +149,6 @@ A production version would require:
 - Loads CSV snapshots from the `data/` directory  
 - Does not require a running MySQL server  
 
-
 ---
 
 ## Future Enhancements
@@ -157,8 +158,8 @@ A production version would require:
 - Direct image uploads  
 - Cloud-based image storage  
 - Automated vaccination reminders  
-- Extended analytics  
-
+- Extended analytics
+  
 ---
 
 ## Author
