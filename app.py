@@ -173,14 +173,15 @@ st.sidebar.header("Mode selection")
 mode = st.sidebar.radio("Choose mode", ["Guest", "Staff"])
 
 if mode == "Staff":
-    emp_id = st.sidebar.text_input("Employee ID (e.g. 1–16)")
+    st.sidebar.info("Use Employee ID (1–16) and password: shelter")
+    emp_id = st.sidebar.text_input("Employee ID (1–16)")
     pwd = st.sidebar.text_input("Password", type="password")
     if st.sidebar.button("Log in"):
-        match = employees[employees["id"].astype(str) == emp_id]
-        if not match.empty and pwd == "shelter123":
+        # Check ID is between 1 and 16, and password is "shelter"
+        if emp_id.isdigit() and 1 <= int(emp_id) <= 16 and pwd == "shelter":
             st.session_state["staff_ok"] = True
-            st.session_state["staff_name"] = match.iloc[0]["name"]
-            st.sidebar.success(f"Welcome {st.session_state['staff_name']}!")
+            st.session_state["staff_name"] = f"Employee {emp_id}"
+            st.sidebar.success(f"Welcome Employee {emp_id}!")
         else:
             st.session_state["staff_ok"] = False
             st.session_state["staff_name"] = None
