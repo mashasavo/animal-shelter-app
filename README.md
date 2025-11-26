@@ -1,116 +1,165 @@
 # Animal Shelter Management System
 
-**Live Demo:** [Streamlit App](https://animal-shelter-app-project.streamlit.app/)  
+**Live Demo:**  
+https://animal-shelter-app-project.streamlit.app/
 
-## Overview
-This project implements an Animal Shelter Management System with a **MySQL database back‑end** and a **Streamlit web front‑end**.  
+**GitHub Repository:**  
+[ADD YOUR REPOSITORY LINK HERE]
 
-It supports two perspectives:
-- **Guest View** – browse available animals with filters such as species, status, and shelter location.  
-- **Staff View** – view animals, vaccinations, and vaccine stock levels (read‑only in Streamlit Cloud).  
-
-The Streamlit app uses **CSV snapshots** exported from the MySQL database to ensure compatibility with cloud deployment.
+---
 
 ## Objective
-Design and deploy a database‑driven system that streamlines animal shelter operations by combining structured relational data with a user‑friendly web interface.
+
+To design and implement a database-driven application that manages animals, shelters, employees, vaccines, and vaccination records. The system is built using a normalized MySQL database and a Streamlit web interface, with CSV snapshots exported from MySQL for cloud execution.
+
+---
+
+## Overview
+
+This project demonstrates a complete Animal Shelter Management System with two main user perspectives:
+
+### Guest View
+- Browse animals  
+- Filter by species, size, status, and shelter  
+- View animal profiles and images  
+
+### Staff View
+- Manage animal records (add, update status, delete)  
+- Review vaccine inventory and stock levels  
+- View upcoming and overdue vaccinations  
+
+Streamlit Cloud does not support direct database connectivity; therefore, the cloud demo utilizes CSV snapshots derived from the MySQL database. The intended production setup connects Streamlit directly to MySQL.
+
+---
 
 ## Features
 
-### Database (MySQL)
-- Normalized relational schema  
-- Five main tables: `shelters`, `animals`, `employees`, `vaccines`, `vaccination_record.`  
-- Primary and foreign keys ensuring referential integrity  
-- ENUM constraints for controlled fields  
-- Indexes for commonly queried attributes  
-- Trigger for automatic stock updates  
-- Reporting view for vaccination history  
-- Advanced SQL queries (CTE, window functions, aggregations)  
+### Database Layer (MySQL)
 
-### Web Application (Streamlit + Python/Pandas)
-- Multi‑tab interface for guests and staff  
-- Card‑style animal browsing with search and filtering  
-- Vaccination and stock summaries  
-- Data loaded from CSV exports  
-- Responsive layout for clarity and presentation  
+- Five interconnected tables:  
+  `shelters`, `animals`, `employees`, `vaccines`, `vaccination_record`
+- Proper primary/foreign key relationships  
+- ENUM validation for controlled fields  
+- Indexes for filter-heavy queries  
+- Trigger to automatically decrement vaccine stock  
+- Stored view consolidating vaccination history  
+- Advanced SQL, including:  
+  - Window functions  
+  - Recursive CTE  
+  - Aggregation and grouping  
+  - Join operations  
+- All SQL scripts tested in MySQL Workbench
+
+---
+
+### Application Layer (Streamlit)
+
+The Streamlit application mirrors real shelter workflows using a clean tab-based layout:
+
+- Guest browsing with filters and animal images  
+- Staff operations:
+  - Add new animals  
+  - Update status  
+  - Delete animals  
+  - View vaccine stock  
+  - Review upcoming vaccinations  
+- CSV-based data loading (`/data` folder) for cloud deployment  
+- Card-style UI for animal profiles  
+- Structured, readable layout designed for usability
+
+---
 
 ### Images
-- Animal photographs stored in `data/images/` and mapped to each animal by name  
-- Future versions could store filenames in the database for upload support  
 
-## Entity‑Relationship Diagram
-(Insert your EER image here once uploaded to the repository.)
+- Stored in `data/images/.`  
+- Mapped to animals by naming convention  
+- Automatically displayed in the application
 
-Example:
-
-![EER Diagram](eer_diagram.png)
-
-## Database Design
-The schema models real shelter operations using the following entities:
-
-1. **shelters** – locations and contact information  
-2. **animals** – dogs and cats housed by shelters  
-3. **employees** – staff members assigned to shelters  
-4. **vaccines** – catalog of vaccines and stock levels  
-5. **vaccination_record** – tracks vaccinations by employee and animal  
-
-This design supports reporting, inventory management, multi‑shelter operations, and automation.
-
-## SQL Scripts Included
-All SQL files are located in `/sql` and include:
-
-- **Schema & Table Creation** – tables, constraints, keys, ENUM validation, indexes  
-- **Data Population** – insert statements with AUTO_INCREMENT IDs  
-- **Advanced Queries** – shelter ranking, vaccination calendar, overdue reports, aggregations, joins, subqueries  
-- **Views & Triggers** – `vw_animal_vaccinations`, `trg_decrement_vaccine_stock`  
-
-All scripts were executed and verified using **MySQL Workbench**.
+---
 
 ## Application Architecture
 
-### Data Layer
-The MySQL database contains the authoritative version of all shelter data.
+### Backend (MySQL)
+- Normalized schema with constraints and relationships  
+- Trigger for stock management  
+- View for vaccination reporting  
+- Intended to serve as the authoritative data source
 
-### Application Layer
-Streamlit loads static CSV exports from MySQL:
+### Data Pipeline
+- MySQL data exported to CSV snapshots  
+- CSVs stored under `data/.`  
+- Streamlit Cloud loads CSVs due to cloud limitations on SQL connections  
 
-- `data/animals.csv`  
-- `data/shelters.csv`  
-- `data/employees.csv`  
-- `data/vaccines.csv`  
-- `data/vaccination_record.csv`  
-- `data/images/.`  
+### Frontend (Streamlit)
+- Python-based UI served through Streamlit  
+- Loads CSV files at runtime  
+- Renders tables, cards, filters, and image components  
+- Designed for both local and cloud execution
 
-This enables the hosted application to run without requiring a live database connection.
+---
 
-### UI Structure
-The UI provides three tabs:
-- **Guest – Browse Animals**: filters (species, status, shelter), animal cards with photos  
-- **Staff – Animals Overview**: total animals, grouped by shelter, full table snapshot  
-- **Staff – Vaccinations & Stock**: vaccine stock table, overdue vaccination report, totals by species  
+## Entity-Relationship Diagram
+
+```md
+![Schema Diagram](schema_diagram.png)
+
+## Included SQL Scripts
+
+final_forward_engineer.sql   # Schema creation, tables, relationships
+queries_advanced.sql         # Trigger, view, analytical queries
+
+## Repository Structure
+
+data/                         # CSV exports used by Streamlit
+    images/                   # Animal photos
+.gitignore
+README.md
+app.py                        # Streamlit application
+config.toml                   # Streamlit configuration
+final_forward_engineer.sql
+queries_advanced.sql
+requirements.txt              # Python dependencies
+schema_diagram.png            # EER diagram
+
+## Testing and Security
+
+- SQL scripts tested in MySQL Workbench
+- Streamlit application tested locally and in Streamlit Cloud
+- Basic guest vs staff separation in the UI
+- Authentication simplified for academic demonstration
+-- A production system would require:
+- Secure credential storage
+- Authentication
+- Role-based access control
 
 ## Deployment
-- Deployed on **Streamlit Cloud**  
-- Dependencies listed in `requirements.txt.`  
-- Static data (CSV + images) versioned in the repository  
+- Set up and populate MySQL using the provided scripts
+- Install dependencies:
+pip install -r requirements.txt
+- Run the app:
+streamlit run app.py
 
-## Testing & Security
-- SQL scripts tested in **MySQL Workbench**  
-- Streamlit app tested **locally and in cloud** deployments  
-- Basic role separation (guest vs staff) implemented in UI layout  
-- Authentication simplified for demonstration purposes  
-- ⚠️ Production version would require secure credential storage and role‑based access control  
+## Streamlit Cloud Deployment
 
-## Future Improvements
-- Full CRUD operations connected to live MySQL  
-- Staff authentication and permissions  
-- Real‑time database syncing  
-- Upload feature for animal images  
-- Automated notifications for overdue vaccinations  
-- Cloud‑based image storage (e.g., S3)  
+- Uses CSVs from the data/ directory
+- No database server required
+
+## Future Enhancements
+
+- Full CRUD integration with a live MySQL backend
+- Staff login and authorization
+- Direct image upload support
+- Cloud image storage
+- Automated vaccination reminders
+- Advanced analytics
 
 ## Author
-Maria Savostianova  
-University of Central Missouri  
-Database Theory and Applications – Final Project
+
+Maria Savostianova
+University of Central Missouri
+Database Theory and Applications — Final Project
+
+
+
 
 
