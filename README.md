@@ -27,12 +27,25 @@ To design and deploy a database‑driven system that streamlines animal shelter 
 - **Application:** Streamlit loads CSV exports and provides guest/staff dashboards.  
 
 ## Entity‑Relationship Diagram
-
-
+![EER Diagram](schema_diagram.png)
 
 ## Deployment
 - Cloud deployment via Streamlit Cloud  
-- Accessible demo link for grading  
+- Accessible demo link for grading
+  
+## Testing
+
+- All SQL scripts were tested locally using MySQL Workbench to verify schema integrity, data relationships, and query correctness.  
+- The Streamlit application was tested in both local and cloud environments to ensure UI functionality, CSV compatibility, and image rendering.
+
+## Security
+
+Basic security measures were implemented for the Streamlit app, including:
+- Password-based login for staff mode (fixed password for demo purposes)
+- Role separation between guest and staff views
+- Cloud deployment with Streamlit’s built-in sandboxing
+
+Note: For demonstration purposes, authentication is simplified for clarity. In a production system, role-based access control and secure credential storage would be required.
 
 ## Future Improvements
 - Full CRUD integration with live MySQL  
