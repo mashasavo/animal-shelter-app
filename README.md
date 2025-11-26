@@ -4,13 +4,14 @@
 https://animal-shelter-app-project.streamlit.app/
 
 **GitHub Repository:**  
-[ADD YOUR REPOSITORY LINK HERE]
+https://github.com/mashasavo/animal-shelter-app
 
 ---
 
 ## Objective
 
 To design and implement a database-driven application that manages animals, shelters, employees, vaccines, and vaccination records. The system comprises a normalized MySQL database and a Streamlit web application, utilizing CSV snapshots exported from MySQL for cloud deployment.
+- This project was completed as part of the Database Theory and Applications course and is based on a real-world shelter workflow.
 
 ---
 
