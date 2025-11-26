@@ -108,8 +108,10 @@ Ensure the file exists at the repository root.
 
 ## Included SQL Scripts
 
-final_forward_engineer.sql   – Schema creation, constraints, relationships  
-queries_advanced.sql         – Trigger, view, analytical SQL examples  
+https://github.com/mashasavo/animal-shelter-app/blob/main/final_forward_engineer.sql
+   – Schema creation, constraints, relationships  
+https://github.com/mashasavo/animal-shelter-app/blob/main/queries_advanced.sql
+        – Trigger, view, analytical SQL examples  
 
 All SQL scripts were developed and validated in MySQL Workbench.
 
