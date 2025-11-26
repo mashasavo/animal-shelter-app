@@ -173,11 +173,11 @@ st.sidebar.header("Mode selection")
 mode = st.sidebar.radio("Choose mode", ["Guest", "Staff"])
 
 if mode == "Staff":
-    emp_id = st.sidebar.text_input("Employer ID (1–16)")
+    emp_id = st.sidebar.text_input("Employee ID (e.g. 1–16)")
     pwd = st.sidebar.text_input("Password", type="password")
     if st.sidebar.button("Log in"):
         match = employees[
-            (employees["employer_id"].astype(str) == emp_id) &
+            (employees["id"].astype(str) == emp_id) &
             (employees["password"].astype(str) == pwd)
         ]
         if not match.empty:
@@ -187,7 +187,7 @@ if mode == "Staff":
         else:
             st.session_state["staff_ok"] = False
             st.session_state["staff_name"] = None
-            st.sidebar.error("Invalid Employer ID or password.")
+            st.sidebar.error("Invalid Employee ID or password.")
 
 # --------------------------------------------------
 # Show views
