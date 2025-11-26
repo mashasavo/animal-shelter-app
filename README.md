@@ -115,21 +115,6 @@ All SQL scripts were developed and validated in MySQL Workbench.
 
 ---
 
-## Repository Structure
-
-data/                         – CSV exports used by Streamlit  
-    images/                   – Animal photos  
-.gitignore  
-README.md  
-app.py                        – Streamlit application  
-config. toml                   – Streamlit configuration  
-final_forward_engineer.sql  
-queries_advanced.sql  
-requirements.txt              – Python dependencies  
-schema_diagram.png            – EER diagram  
-
----
-
 ## Testing and Security
 
 ### Testing
