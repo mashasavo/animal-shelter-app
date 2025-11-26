@@ -136,19 +136,17 @@ A production version would require:
 
 ### Running Locally
 
-1. Create and populate the MySQL database using the provided SQL files.  
-2. Install dependencies:
+1. Set up and populate the MySQL database using the provided SQL scripts.
+2. Install dependencies using `pip install -r requirements.txt`.
+3. Launch the Streamlit application with `streamlit run app.py`.
 
-   pip install -r requirements.txt
-
-3. Run the application:
-
-   streamlit run app.py
+---
 
 ### Streamlit Cloud Deployment
 
-- Uses CSVs from the `data/` directory  
+- Loads CSV snapshots from the `data/` directory  
 - Does not require a running MySQL server  
+
 
 ---
 
