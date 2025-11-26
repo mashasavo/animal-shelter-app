@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-from datetime import date
 from pathlib import Path
 
 # --------------------------------------------------
@@ -12,6 +11,24 @@ st.set_page_config(
     layout="wide"
 )
 
+# Custom CSS for fonts (Google Fonts: Roboto Slab)
+st.markdown(
+    """
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <style>
+    html, body, [class*="css"] {
+        font-family: 'Roboto Slab', serif;
+    }
+    h1, h2, h3, h4 {
+        font-family: 'Roboto Slab', serif;
+        font-weight: 600;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Session state
 if "staff_ok" not in st.session_state:
     st.session_state["staff_ok"] = False
 if "staff_name" not in st.session_state:
@@ -63,7 +80,7 @@ def load_data():
     shelters = pd.read_csv(SHELTERS_CSV, sep=";")
     vaccines = pd.read_csv(VACCINES_CSV, sep=";")
     vaccination_record = pd.read_csv(VACC_RECORD_CSV, sep=";")
-    employees = pd.read_csv(EMPLOYEES_CSV, sep=";")
+    employees = pd.read_csv(EMPLOYEES_CSV)  # CSV with id, first_name, last_name, role, etc.
 
     animals = animals.merge(shelters[["shelter_id", "shelter_name", "city"]],
                             on="shelter_id", how="left")
@@ -167,7 +184,7 @@ def staff_view():
         st.dataframe(vaccination_record, use_container_width=True)
 
 # --------------------------------------------------
-# Sidebar login (Employer ID + password)
+# Sidebar login (super-simple: ID 1–16 + password "shelter")
 # --------------------------------------------------
 st.sidebar.header("Mode selection")
 mode = st.sidebar.radio("Choose mode", ["Guest", "Staff"])
@@ -177,7 +194,6 @@ if mode == "Staff":
     emp_id = st.sidebar.text_input("Employee ID (1–16)")
     pwd = st.sidebar.text_input("Password", type="password")
     if st.sidebar.button("Log in"):
-        # Check ID is between 1 and 16, and password is "shelter"
         if emp_id.isdigit() and 1 <= int(emp_id) <= 16 and pwd == "shelter":
             st.session_state["staff_ok"] = True
             st.session_state["staff_name"] = f"Employee {emp_id}"
